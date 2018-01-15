@@ -10,6 +10,11 @@
 		.container
 			.navbar-brand= link_to "Cookbook", root_path
 
+			= form_tag search_recipes_path, method: :get, class: "navbar-form navbar-right", role: "search" do
+				%p
+					= text_field_tag :search, params[:search], class: "form-control"
+					= submit_tag "Search", name: nil, class: "btn btn-default"
+
 			- if user_signed_in?
 				%ul.nav.navbar-nav.navbar-right
 					%li= link_to "New Recipe", new_recipe_path

@@ -12,7 +12,7 @@
 				%br
 				%p
 					.btn.btn-group
-						= link_to like_recipe_path(@recipe), method: :put, class: "btn btn-primary btn-sa" do
+						= link_to like_recipe_path(@recipe), method: :put, class: "btn btn-primary btn-outline" do
 							%span.glyphicon.glyphicon-arrow-up
 							Upvote
 							\#{@recipe.get_upvotes.size}

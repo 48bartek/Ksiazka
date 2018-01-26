@@ -5,7 +5,7 @@
 		.col-md-8
 			#recipe_info
 				%h1= @recipe.title
-				%p.description= @recipe.description
+				%p.description{:min_height => "200px"}= @recipe.description
 				%p
 					Submitted by
 					= @recipe.user.email
@@ -20,6 +20,14 @@
 							%span.glyphicon.glyphicon-arrow-down
 							Downvote
 							\#{@recipe.get_downvotes.size}
+				%table{:style => "width:100%"}
+					%tr
+						%td{:align => "left"}
+							- if (@recipe.user == current_user) || (current_user.try(:admin?))
+								= link_to "Edit", edit_recipe_path, class: "btn btn-default", :align => "left"
+								= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default", :align => "left"
+						%td{:align => "right"}
+							= link_to "Write a Review", new_recipe_review_path(@recipe)
 	.row
 		.col-md-6
 			#ingredients
@@ -36,7 +44,13 @@
 
 	.row
 		.col-md-12
-			= link_to "Back", root_path, class: "btn btn-default"
-			- if (@recipe.user == current_user) || (current_user.try(:admin?))
-				= link_to "Edit", edit_recipe_path, class: "btn btn-default"
-				= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default"
+			#reviews
+				- if (@reviews.blank?)
+					%h3 No reviews yet, would you like to add the first one?
+					= link_to "Write Review", new_recipe_review_path(@recipe), class: "btn btn-danger"
+				- else
+					- @reviews.each do |review|
+						.reviews
+							%p= review.rating
+							%li= review.comment
+							%hr

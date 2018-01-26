@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
 	belongs_to :user
+	has_many :reviews
 	acts_as_votable
 	searchkick
 	

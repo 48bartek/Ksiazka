@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :reviews
   devise_for :users
 	resources :recipes do
+		resources :reviews, except: [:show, :index]
 		collection do
 			get 'search'
 		end

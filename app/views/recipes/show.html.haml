@@ -5,7 +5,7 @@
 		.col-md-8
 			#recipe_info
 				%h1= @recipe.title
-				%p.description{:min_height => "200px"}= @recipe.description
+				%p.description= @recipe.description
 				%p
 					Submitted by
 					= @recipe.user.email
@@ -27,7 +27,7 @@
 								= link_to "Edit", edit_recipe_path, class: "btn btn-default", :align => "left"
 								= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default", :align => "left"
 						%td{:align => "right"}
-							= link_to "Write a Review", new_recipe_review_path(@recipe)
+							= link_to "Write a Review", new_recipe_review_path(@recipe), class: "btn btn-primary"
 	.row
 		.col-md-6
 			#ingredients
@@ -49,6 +49,7 @@
 					%h3 No reviews yet, would you like to add the first one?
 					= link_to "Write Review", new_recipe_review_path(@recipe), class: "btn btn-danger"
 				- else
+					%h2 Reviews:
 					- @reviews.each do |review|
 						.reviews
 							%p= review.rating

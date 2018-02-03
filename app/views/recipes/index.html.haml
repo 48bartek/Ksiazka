@@ -9,4 +9,4 @@
 						.col-md-6
 							%h2= link_to recipe.title, recipe
 						.col-md-6
-							%h2{:align => "right", :style => "color:#DB6161;"}= recipe.get_upvotes.size
+							%h2{:align => "right", :style => "color:#DB6161;"}= recipe.get_upvotes.size + recipe.get_downvotes.size
